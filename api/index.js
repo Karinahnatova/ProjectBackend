@@ -22,7 +22,7 @@ app.use(express.json()); // For parsing application/json
 app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
 
 // Main API routes
-app.use("/API/v1/", router);
+app.use("/api/v1/", router);
 
 // Root endpoint to serve HTML directly (consider serving through static files)
 app.get("/", (req, res) => {
