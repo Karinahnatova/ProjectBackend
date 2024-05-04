@@ -3,7 +3,10 @@ import cors from "cors";
 import { logger } from "./middlewares/logger.js";
 import router from "./routes/index.routes.js";
 
+const connectDB = require('../api/database/database.js');
 const app = express();
+
+connectDB();
 
 // Best to avoid console.clear in production code to maintain log integrity.
 // console.clear();

@@ -8,20 +8,20 @@ import { DBNAME, PASS, USER, fullDomain } from "../config/config.js";
 //     .then(()=> console.log("Conectado a MongoDB Atlas"))
 //     .catch((e)=> console.log("Error en la conexion", e))
 
-async function connectDB() {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("MongoDB connected");
-  } catch (err) {
-    console.error("Failed to connect to MongoDB", err);
-  }
-}
+// async function connectDB() {
+//   try {
+//     await mongoose.connect(process.env.MONGODB_URI, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     });
+//     console.log("MongoDB connected");
+//   } catch (err) {
+//     console.error("Failed to connect to MongoDB", err);
+//   }
+// }
 
-// Llamada a la función para establecer la conexión
-connectDB();
+// // Llamada a la función para establecer la conexión
+// connectDB();
 
 // Opciones de configuración para el esquema del producto
 const options = {

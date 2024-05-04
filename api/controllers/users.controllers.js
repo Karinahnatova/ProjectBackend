@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
-import jwt from 'jsonwebtoken';
-import { DBNAME, PASS, USER} from "../config/config.js";
+import jwt from "jsonwebtoken";
+import { DBNAME, PASS, USER } from "../config/config.js";
 
-// Función para conectarse a la base de datos MongoDB 
-const connect = async () => {
-  const url = `mongodb+srv://${USER}:${PASS}@cei-valencia.sl8cxae.mongodb.net/${DBNAME}`;
-  await mongoose
-    .connect(url)
-    .then(() => console.log("Conectado a MongoDB Atlas"))
-    .catch((e) => console.log("Error en la conexion", e));
-};
-connect();
+// // Función para conectarse a la base de datos MongoDB
+// const connect = async () => {
+//   const url = `mongodb+srv://${USER}:${PASS}@cei-valencia.sl8cxae.mongodb.net/${DBNAME}`;
+//   await mongoose
+//     .connect(url)
+//     .then(() => console.log("Conectado a MongoDB Atlas"))
+//     .catch((e) => console.log("Error en la conexion", e));
+// };
+// connect();
 
 // Opciones de configuración para el esquema del usuario
 const options = {
@@ -69,18 +69,15 @@ export const verifyToken = (req, res, next) => {
 const JWT_SECRET = "test_secret_key";
 
 const generateTokenJWT = (user) => {
-  
   const payload = {
     user: {
-      id: user.id, 
+      id: user.id,
       username: user.username,
-      
     },
   };
 
-  
   const token = jwt.sign(payload, JWT_SECRET, {
-    expiresIn: "1h", 
+    expiresIn: "1h",
   });
 
   return token;
@@ -90,7 +87,6 @@ const generateTokenJWT = (user) => {
 export const authenticate = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    
 
     const user = await User.findOne({ username });
 
@@ -98,18 +94,14 @@ export const authenticate = async (req, res, next) => {
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
 
-   
-
     const isMatch = password === user.password ? true : false;
 
     if (!isMatch) {
       return res.status(401).json({ error: "Contraseña incorrecta" });
     }
 
-   
     const token = await generateTokenJWT(user);
 
-    
     res.json({ token });
   } catch (error) {
     console.error("Error de autenticación:", error);
@@ -169,7 +161,6 @@ export const updateUser = async (req, res, next) => {
     );
 
     if (!editedUser) {
-      
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
 
@@ -184,9 +175,8 @@ export const updateUser = async (req, res, next) => {
 export const deleteUser = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const deletedUser = await User.findByIdAndDelete(id); 
+    const deletedUser = await User.findByIdAndDelete(id);
     if (!deletedUser) {
-     
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
     res.json({
