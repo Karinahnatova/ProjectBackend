@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
 
 const connectDB = async () => {
+  const url = `mongodb+srv://karinahnatova:Greo6789@cei-valencia.sl8cxae.mongodb.net/`;
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(url);
     console.log("MongoDB connected successfully.");
   } catch (err) {
     console.error("Failed to connect to MongoDB:", err);
