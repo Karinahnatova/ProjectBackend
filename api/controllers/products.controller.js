@@ -3,7 +3,7 @@ import { DBNAME, PASS, USER, fullDomain } from "../config/config.js";
 
 // Función para conectarse a la base de datos MongoDB 
 const connect = async() => {
-    const url=`mongodb+srv://${USER}:${PASS}@cei-valencia.sl8cxae.mongodb.net/${DBNAME}`
+    const url=`mongodb+srv://karinahnatova:<Greo6789>@cei-valencia.sl8cxae.mongodb.net/project?retryWrites=true&w=majority`
     await mongoose.connect(url)
     .then(()=> console.log("Conectado a MongoDB Atlas"))
     .catch((e)=> console.log("Error en la conexion", e))
