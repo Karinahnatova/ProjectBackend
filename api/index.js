@@ -1,32 +1,33 @@
 import express from "express";
 import cors from "cors";
 import { logger } from "./middlewares/logger.js";
-import { fullDomain, PORT } from "./config/config.js";
 import router from "./routes/index.routes.js";
 
 const app = express();
-console.clear();
 
-app.use("/html-form", express.static("public")); //formulario html de uploads
-app.use("/files", express.static("uploads")); //carpeta de archivos subidos a uploads
+// Best to avoid console.clear in production code to maintain log integrity.
+// console.clear();
 
-app.use(cors());
-app.use(logger);
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Setup for serving static HTML form and uploaded files
+// Ensure these directories are appropriately configured in your Vercel project
+app.use("/html-form", express.static("public")); // Static HTML forms
+app.use("/files", express.static("uploads")); // Folder for uploaded files (consider using cloud storage in production)
 
+app.use(cors()); // Apply CORS
+app.use(logger); // Apply custom logger middleware
+app.use(express.json()); // For parsing application/json
+app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
+
+// Main API routes
 app.use("/API/v1/", router);
-app.get("/", (req, res) => {
-  res.setHeader("Content-type", "text/html");
 
-  const landingHTML = `
-    <h1>BIENVENIDOS A NUESTRA API DE HTML</h1>
-    `;
+// Root endpoint to serve HTML directly (consider serving through static files)
+app.get("/", (req, res) => {
+  res.setHeader("Content-Type", "text/html");
+  const landingHTML = `<h1>Welcome to Our HTML API</h1>`;
   res.send(landingHTML);
 });
 
-// app.listen(PORT, ()=> {
-//     console.log(`Server is running on ${fullDomain}`);
-// });
-
-module.exports = app;
+// Since you're deploying to Vercel, listening locally is not needed here
+// The app will be exported and Vercel will handle the invocation
+export default app;
