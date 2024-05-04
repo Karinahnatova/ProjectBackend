@@ -8,14 +8,6 @@ const app = express();
 // Best to avoid console.clear in production code to maintain log integrity.
 // console.clear();
 
-const connect = async () => {
-  const url = `mongodb+srv://${USER}:${PASS}@cei-valencia.sl8cxae.mongodb.net/${DBNAME}`;
-  await mongoose
-    .connect(url)
-    .then(() => console.log("Conectado a MongoDB Atlas"))
-    .catch((e) => console.log("Error en la conexion", e));
-};
-connect();
 
 // Setup for serving static HTML form and uploaded files
 // Ensure these directories are appropriately configured in your Vercel project

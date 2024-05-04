@@ -2,15 +2,15 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import { DBNAME, PASS, USER } from "../config/config.js";
 
-// // Función para conectarse a la base de datos MongoDB
-// const connect = async () => {
-//   const url = `mongodb+srv://karinahnatova:<Greo6789>@cei-valencia.sl8cxae.mongodb.net/project?retryWrites=true&w=majority`;
-//   await mongoose
-//     .connect(url)
-//     .then(() => console.log("Conectado a MongoDB Atlas"))
-//     .catch((e) => console.log("Error en la conexion", e));
-// };
-// connect();
+// Función para conectarse a la base de datos MongoDB
+const connect = async () => {
+  const url = `mongodb+srv://karinahnatova:<Greo6789>@cei-valencia.sl8cxae.mongodb.net/project?retryWrites=true&w=majority`;
+  await mongoose
+    .connect(url)
+    .then(() => console.log("Conectado a MongoDB Atlas"))
+    .catch((e) => console.log("Error en la conexion", e));
+};
+connect();
 
 // Opciones de configuración para el esquema del usuario
 const options = {
