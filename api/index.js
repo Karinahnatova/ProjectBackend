@@ -9,7 +9,7 @@ const app = express();
 // Best to avoid console.clear in production code to maintain log integrity.
 // console.clear();
 
-connectDB();
+// connectDB();
 
 // Setup for serving static HTML form and uploaded files
 // Ensure these directories are appropriately configured in your Vercel project
